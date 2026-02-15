@@ -1,0 +1,28 @@
+export interface InfoProps {
+  className?: string;
+  size?: number;
+}
+
+export const Info = ({ className = "", size = 16 }: InfoProps) => {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 16 16"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+    >
+      <circle cx="8" cy="8" r="8" fill="#2084E1" />
+      <path
+        d="M8 8V10V12M8 5.03516V5"
+        stroke="#FCFAF7"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+};
+
+export default Info;

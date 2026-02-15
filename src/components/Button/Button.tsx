@@ -1,0 +1,166 @@
+import { ReactNode } from "react";
+import type { ColorVariants, Size } from "../../types";
+
+export interface ButtonProps {
+  variant: ColorVariants;
+  size?: Size;
+  children?: ReactNode;
+  onClick?: (id?: string) => void;
+  isActive?: boolean;
+  label?: string;
+  id?: string;
+  disabled?: boolean;
+  className?: string;
+  type?: "button" | "submit" | "reset";
+}
+
+export const Button = ({
+  variant,
+  size = "md",
+  children,
+  onClick,
+  isActive,
+  id,
+  label,
+  disabled,
+  className = "",
+  type = "button",
+}: ButtonProps) => {
+  if (typeof isActive === "boolean" && id === undefined) {
+    throw Error("If button has isActive props, it must have id props too");
+  }
+
+  const classNames = [
+    "relative flex gap-2 items-center rounded-sm font-sans border-2 transition-colors leading-none",
+  ];
+
+  const textColor = "text-primary focus:text-white";
+  const borderColor = "border-neutral dark:border-primary";
+
+  classNames.push(textColor, borderColor);
+
+  switch (variant) {
+    case "primary":
+      const primaryLight =
+        "text-primary bg-neutral focus:bg-primary hover:border-primary";
+      const primaryDark =
+        "dark:text-white dark:bg-gray dark:hover:bg-neutral dark:hover:text-primary";
+      classNames.push(primaryLight, primaryDark);
+      break;
+    case "success":
+      const successLight =
+        "text-primary bg-neutral focus:bg-primary focus:text-success hover:border-success";
+      const successDark =
+        "dark:text-white dark:bg-gray hover:dark:bg-success dark:focus:border-success";
+      classNames.push(successLight, successDark);
+      break;
+    case "warning":
+      const warningLight =
+        "text-primary bg-neutral focus:bg-primary focus:text-warning hover:border-warning";
+      const warningDark =
+        "dark:text-white dark:bg-gray hover:dark:bg-warning dark:focus:border-warning";
+      classNames.push(warningLight, warningDark);
+      break;
+    case "danger":
+      const dangerLight =
+        "text-primary bg-neutral focus:bg-primary focus:text-danger hover:border-danger";
+      const dangerDark =
+        "dark:text-white dark:bg-gray hover:dark:bg-danger dark:focus:border-danger";
+      classNames.push(dangerLight, dangerDark);
+      break;
+    case "info":
+      const infoLight =
+        "text-primary bg-neutral focus:bg-primary focus:text-info hover:border-info";
+      const infoDark =
+        "dark:text-white dark:bg-gray hover:dark:bg-info dark:focus:border-info";
+      classNames.push(infoLight, infoDark);
+      break;
+    case "blue":
+      const blueLight =
+        "text-primary bg-neutral focus:bg-primary focus:text-blue hover:border-blue";
+      const blueDark =
+        "dark:text-white dark:bg-gray hover:dark:bg-blue dark:focus:border-blue";
+      classNames.push(blueLight, blueDark);
+      break;
+  }
+
+  switch (size) {
+    case "xs":
+      classNames.push("text-xs py-1 px-2");
+      break;
+    case "sm":
+      classNames.push("text-sm py-1 px-4");
+      break;
+    case "md":
+      classNames.push("text-md py-4 px-6");
+      break;
+    case "lg":
+      classNames.push("text-lg py-5 px-8");
+      break;
+  }
+
+  if (isActive === true) {
+    switch (variant) {
+      case "primary":
+        classNames.push("bg-primary dark:bg-neutral dark:text-primary");
+        break;
+      case "success":
+        classNames.push("dark:bg-success");
+        break;
+      case "warning":
+        classNames.push("dark:bg-warning");
+        break;
+      case "danger":
+        classNames.push("dark:bg-danger");
+        break;
+      case "info":
+        classNames.push("dark:bg-info");
+        break;
+    }
+  }
+
+  if (disabled) {
+    classNames.push(
+      "cursor-not-allowed hover:bg-neutral dark:hover:bg-neutral opacity-50"
+    );
+  }
+
+  if (className) {
+    classNames.push(className);
+  }
+
+  return (
+    <button
+      type={type}
+      className={classNames.join(" ")}
+      onClick={() => {
+        if (isActive === true) {
+          onClick?.();
+        } else {
+          onClick?.(id);
+        }
+      }}
+      disabled={disabled}
+    >
+      {children || label}
+      {isActive === true && (
+        <svg
+          className="w-4 h-4 ml-1"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M6 18L18 6M6 6l12 12"
+          />
+        </svg>
+      )}
+    </button>
+  );
+};
+
+export default Button;

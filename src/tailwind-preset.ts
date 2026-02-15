@@ -1,0 +1,77 @@
+import type { Config } from "tailwindcss";
+
+/**
+ * Madecki UI Tailwind preset
+ * Includes custom colors, spacing, and typography used by components
+ */
+export const madeckiPreset: Partial<Config> = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        primary: "#1E1E1E",
+        darkgray: "#272727",
+        lightgray: "#6D6D6D",
+        gray: "#3A3A3A",
+        icongray: "#BFBFBF",
+        white: "#FCFAF7",
+        success: "#87BB54",
+        danger: "#CB5065",
+        info: "#714E8E",
+        blue: "#2084E1",
+        warning: "#EDA867",
+        neutral: "#E1E1E1",
+      },
+      borderRadius: {
+        sm: "10px",
+        smb: "11px",
+        md: "20px",
+        mdb: "21px",
+        circle: "50%",
+      },
+      spacing: {
+        "1": "4px",
+        "2": "8px",
+        "3": "12px",
+        "4": "14px",
+        "5": "16px",
+        "6": "20px",
+        "7": "24px",
+        "8": "28px",
+        "9": "32px",
+        "10": "40px",
+        "11": "48px",
+        "12": "64px",
+        "13": "72px",
+        "14": "88px",
+        "15": "96px",
+        "16": "104px",
+        "17": "120px",
+        "18": "136px",
+        "19": "144px",
+        "20": "152px",
+        "21": "308px",
+      },
+      fontSize: {
+        xs: "12px",
+        sm: "14px",
+        md: "16px",
+        lg: "18px",
+        xl: "20px",
+        "2xl": "24px",
+        "3xl": "29px",
+        "4xl": "34px",
+      },
+      backgroundImage: {
+        gradient:
+          "radial-gradient(at bottom left, #eda867, #eda867, #cb5065, #714e8e)",
+      },
+      padding: {
+        px: "1px",
+        "2px": "2px",
+      },
+    },
+  },
+};
+
+export default madeckiPreset;
