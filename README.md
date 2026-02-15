@@ -15,13 +15,25 @@ pnpm add @madecki/ui
 ## Requirements
 
 - React 18+
-- Tailwind CSS 3+
+- Tailwind CSS 4+
 
 ## Setup
 
 ### 1. Configure Tailwind CSS
 
-Add the Madecki UI preset to your `tailwind.config.js`:
+**Option A: Using CSS `@config` directive (recommended)**
+
+Reference the preset in your main CSS file:
+
+```css
+@import "tailwindcss";
+@config "@madecki/ui/tailwind-preset";
+@source "./node_modules/@madecki/ui/dist/**/*.{js,cjs}";
+```
+
+**Option B: Using JavaScript config**
+
+If you prefer a `tailwind.config.js` file:
 
 ```js
 import { madeckiPreset } from "@madecki/ui/tailwind-preset";
@@ -31,10 +43,8 @@ export default {
   presets: [madeckiPreset],
   content: [
     "./src/**/*.{js,ts,jsx,tsx}",
-    // Include the package components
     "./node_modules/@madecki/ui/dist/**/*.{js,cjs}",
   ],
-  // ... your config
 };
 ```
 
@@ -199,6 +209,41 @@ npm run build
 
 # Run type checking
 npm run typecheck
+```
+
+## Releasing
+
+Releases are fully automated using [semantic-release](https://semantic-release.gitbook.io/). When commits are pushed to `main`, the CI automatically:
+
+1. Analyzes commit messages to determine the version bump
+2. Updates `package.json` and `CHANGELOG.md`
+3. Creates a Git tag and GitHub Release
+4. Publishes to NPM with provenance
+
+### Commit Message Format
+
+This project uses [Conventional Commits](https://www.conventionalcommits.org/). Your commit messages determine the version bump:
+
+| Commit Type | Example | Version Bump |
+|-------------|---------|--------------|
+| `fix:` | `fix: resolve input focus issue` | Patch (1.0.0 → 1.0.1) |
+| `feat:` | `feat: add new Checkbox component` | Minor (1.0.0 → 1.1.0) |
+| `feat!:` or `BREAKING CHANGE:` | `feat!: require Tailwind v4` | Major (1.0.0 → 2.0.0) |
+| `docs:`, `chore:`, `style:`, `refactor:`, `test:` | `docs: update README` | No release |
+
+### Examples
+
+```bash
+# Bug fix → patch release
+git commit -m "fix: button not responding to click events"
+
+# New feature → minor release
+git commit -m "feat: add Toast notification component"
+
+# Breaking change → major release
+git commit -m "feat!: drop support for React 17
+
+BREAKING CHANGE: React 18+ is now required"
 ```
 
 ## License
