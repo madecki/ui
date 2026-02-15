@@ -92,7 +92,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/madecki/madecki-ui"
+    "url": "https://github.com/madecki/ui"
   },
   "publishConfig": {
     "access": "public"
