@@ -35,51 +35,50 @@ export const Button = ({
   ];
 
   const textColor = "text-primary focus:text-white";
-  const borderColor = "border-neutral dark:border-primary";
 
-  classNames.push(textColor, borderColor);
+  classNames.push(textColor);
 
   switch (variant) {
     case "primary":
       const primaryLight =
-        "text-primary bg-neutral focus:bg-primary hover:border-primary";
+        "border-primary text-primary bg-neutral focus:bg-primary";
       const primaryDark =
         "dark:text-white dark:bg-gray dark:hover:bg-neutral dark:hover:text-primary";
       classNames.push(primaryLight, primaryDark);
       break;
     case "success":
       const successLight =
-        "text-primary bg-neutral focus:bg-primary focus:text-success hover:border-success";
+        "border-success text-primary bg-neutral focus:bg-primary focus:text-success";
       const successDark =
-        "dark:text-white dark:bg-gray hover:dark:bg-success dark:focus:border-success";
+        "dark:text-white dark:bg-gray dark:hover:bg-success";
       classNames.push(successLight, successDark);
       break;
     case "warning":
       const warningLight =
-        "text-primary bg-neutral focus:bg-primary focus:text-warning hover:border-warning";
+        "border-warning text-primary bg-neutral focus:bg-primary focus:text-warning";
       const warningDark =
-        "dark:text-white dark:bg-gray hover:dark:bg-warning dark:focus:border-warning";
+        "dark:text-white dark:bg-gray dark:hover:bg-warning";
       classNames.push(warningLight, warningDark);
       break;
     case "danger":
       const dangerLight =
-        "text-primary bg-neutral focus:bg-primary focus:text-danger hover:border-danger";
+        "border-danger text-primary bg-neutral focus:bg-primary focus:text-danger";
       const dangerDark =
-        "dark:text-white dark:bg-gray hover:dark:bg-danger dark:focus:border-danger";
+        "dark:text-white dark:bg-gray dark:hover:bg-danger";
       classNames.push(dangerLight, dangerDark);
       break;
     case "info":
       const infoLight =
-        "text-primary bg-neutral focus:bg-primary focus:text-info hover:border-info";
+        "border-info text-primary bg-neutral focus:bg-primary focus:text-info";
       const infoDark =
-        "dark:text-white dark:bg-gray hover:dark:bg-info dark:focus:border-info";
+        "dark:text-white dark:bg-gray dark:hover:bg-info";
       classNames.push(infoLight, infoDark);
       break;
     case "blue":
       const blueLight =
-        "text-primary bg-neutral focus:bg-primary focus:text-blue hover:border-blue";
+        "border-blue text-primary bg-neutral focus:bg-primary focus:text-blue";
       const blueDark =
-        "dark:text-white dark:bg-gray hover:dark:bg-blue dark:focus:border-blue";
+        "dark:text-white dark:bg-gray dark:hover:bg-blue";
       classNames.push(blueLight, blueDark);
       break;
   }
