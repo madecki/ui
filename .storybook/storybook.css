@@ -1,0 +1,25 @@
+/* Storybook preview styles */
+html,
+body,
+#storybook-root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.storybook-wrapper {
+  min-height: 100vh;
+  width: 100vw;
+  padding: 1rem;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* Light theme: white fading to light gray */
+  background: linear-gradient(180deg, #FCFAF7 0%, #E1E1E1 100%);
+}
+
+/* Dark theme - .dark class is applied to parent by withThemeByClassName */
+.dark .storybook-wrapper {
+  background: #1E1E1E;
+}

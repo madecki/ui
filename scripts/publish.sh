@@ -8,6 +8,11 @@ GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
+# Load .env file if it exists
+if [[ -f .env ]]; then
+    export $(grep -v '^#' .env | xargs)
+fi
+
 echo -e "${YELLOW}Publishing @madecki/ui to NPM...${NC}\n"
 
 # Check if user is logged in to NPM
@@ -51,7 +56,21 @@ read -p "Publish this version to NPM? (y/N) " -n 1 -r
 echo
 
 if [[ $REPLY =~ ^[Yy]$ ]]; then
+    # Check for NPM_TOKEN environment variable
+    if [[ -z "${NPM_TOKEN}" ]]; then
+        echo -e "\n${RED}Error: NPM_TOKEN is not set.${NC}"
+        echo "Create a granular access token at https://www.npmjs.com/settings/~/tokens"
+        echo "with 'Bypass 2FA' enabled, then add it to .env file:"
+        echo "  cp .env.example .env"
+        echo "  # Edit .env and add your token"
+        exit 1
+    fi
+
+    # Set the token for this publish
+    npm config set //registry.npmjs.org/:_authToken "${NPM_TOKEN}"
     npm publish
+    # Clean up token from npm config
+    npm config delete //registry.npmjs.org/:_authToken
     echo -e "\n${GREEN}✓ Successfully published @madecki/ui!${NC}"
 else
     echo -e "${YELLOW}Publication cancelled.${NC}"

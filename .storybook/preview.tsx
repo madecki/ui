@@ -1,9 +1,12 @@
 import type { Preview } from "@storybook/react";
+import React from "react";
 import { withThemeByClassName } from "@storybook/addon-themes";
 import "../src/styles/globals.css";
+import "./storybook.css";
 
 const preview: Preview = {
   parameters: {
+    layout: "fullscreen",
     controls: {
       matchers: {
         color: /(background|color)$/i,
@@ -12,11 +15,14 @@ const preview: Preview = {
     },
     backgrounds: {
       default: "dark",
-      values: [
-        { name: "dark", value: "#1E1E1E" },
-        { name: "light", value: "#FCFAF7" },
-      ],
+      options: {
+        dark: { name: "Dark", value: "#1E1E1E" },
+        light: { name: "Light", value: "#FCFAF7" },
+      },
     },
+  },
+  initialGlobals: {
+    backgrounds: { value: "dark" },
   },
   decorators: [
     withThemeByClassName({
@@ -26,6 +32,12 @@ const preview: Preview = {
       },
       defaultTheme: "dark",
     }),
+    // Wrapper decorator to ensure background fills the entire canvas
+    (Story) => (
+      <div className="storybook-wrapper">
+        <Story />
+      </div>
+    ),
   ],
 };
 
