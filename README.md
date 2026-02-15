@@ -222,28 +222,51 @@ Releases are fully automated using [semantic-release](https://semantic-release.g
 
 ### Commit Message Format
 
-This project uses [Conventional Commits](https://www.conventionalcommits.org/). Your commit messages determine the version bump:
+This project uses [Conventional Commits](https://www.conventionalcommits.org/) enforced by [commitlint](https://commitlint.js.org/). All commit messages are validated before commit.
 
-| Commit Type | Example | Version Bump |
-|-------------|---------|--------------|
-| `fix:` | `fix: resolve input focus issue` | Patch (1.0.0 → 1.0.1) |
-| `feat:` | `feat: add new Checkbox component` | Minor (1.0.0 → 1.1.0) |
-| `feat!:` or `BREAKING CHANGE:` | `feat!: require Tailwind v4` | Major (1.0.0 → 2.0.0) |
-| `docs:`, `chore:`, `style:`, `refactor:`, `test:` | `docs: update README` | No release |
+**Format:** `type(scope?): description`
+
+### Commit Types
+
+| Type | Description | Release |
+|------|-------------|---------|
+| `feat` | New feature | Minor |
+| `fix` | Bug fix | Patch |
+| `docs` | Documentation only | None |
+| `style` | Code style (formatting, semicolons) | None |
+| `refactor` | Code change that neither fixes nor adds | None |
+| `perf` | Performance improvement | Patch |
+| `test` | Adding or updating tests | None |
+| `chore` | Maintenance tasks | None |
+| `ci` | CI/CD changes | None |
+| `build` | Build system changes | None |
+
+### Breaking Changes
+
+Add `!` after the type or include `BREAKING CHANGE:` in the footer for major version bumps:
+
+```bash
+feat!: require Tailwind v4
+```
 
 ### Examples
 
 ```bash
-# Bug fix → patch release
-git commit -m "fix: button not responding to click events"
+# Bug fix → patch release (1.0.0 → 1.0.1)
+git commit -m "fix: resolve button click handler"
 
-# New feature → minor release
+# New feature → minor release (1.0.0 → 1.1.0)
 git commit -m "feat: add Toast notification component"
 
-# Breaking change → major release
-git commit -m "feat!: drop support for React 17
+# With scope
+git commit -m "feat(Button): add loading state"
 
-BREAKING CHANGE: React 18+ is now required"
+# Breaking change → major release (1.0.0 → 2.0.0)
+git commit -m "feat!: drop support for React 17"
+
+# No release
+git commit -m "docs: update installation instructions"
+git commit -m "chore: update dependencies"
 ```
 
 ## License
