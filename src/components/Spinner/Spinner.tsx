@@ -18,7 +18,7 @@ export const Spinner = ({ size = "md", className = "" }: SpinnerProps) => {
       break;
     case "lg":
       dimensions = "w-24 h-24";
-      borderWidth = "border-[8px]";
+      borderWidth = "border-8";
       break;
   }
 

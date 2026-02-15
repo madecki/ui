@@ -40,11 +40,10 @@ export const Input = ({
 
   const inputClassNames = ["rounded-sm font-sans z-10 w-full"];
 
-  const textColor = "text-primary";
   const spacings = "py-4 px-5";
-  const outline = "outline-none";
+  const outline = "outline-hidden";
 
-  inputClassNames.push(textColor, spacings, outline);
+  inputClassNames.push(spacings, outline);
 
   const inputWrapperClassNames = ["flex rounded-smb p-px w-full"];
 
@@ -52,14 +51,14 @@ export const Input = ({
 
   switch (variant) {
     case "primary":
-      inputClassNames.push("bg-neutral");
+      inputClassNames.push("text-primary bg-neutral");
       inputWrapperClassNames.push("bg-lightgray");
       break;
     case "secondary":
-      inputClassNames.push("bg-neutral dark:bg-gray");
+      inputClassNames.push("text-neutral bg-neutral dark:bg-gray");
       break;
     case "tertiary":
-      inputClassNames.push("bg-neutral dark:bg-primary");
+      inputClassNames.push("text-neutral bg-neutral dark:bg-primary");
       inputWrapperClassNames.push("bg-lightgray");
       break;
   }
