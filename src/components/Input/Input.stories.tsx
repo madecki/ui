@@ -105,6 +105,12 @@ export const WithDefaultValue: Story = {
 };
 
 export const AllVariants: Story = {
+  args: {
+    name: "primary",
+    label: "Primary",
+    placeholder: "Primary variant",
+    variant: "primary",
+  },
   render: () => (
     <div className="flex flex-col gap-4 w-80">
       <Input

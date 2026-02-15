@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Button } from "./Button";
+import { Button, ButtonProps } from "./Button";
 
 const meta = {
   title: "Components/Button",
@@ -114,6 +114,9 @@ export const Disabled: Story = {
 };
 
 export const AllVariants: Story = {
+  args: {
+    variant: "primary",
+  },
   render: () => (
     <div className="flex flex-wrap gap-4">
       <Button variant="primary" label="Primary" />

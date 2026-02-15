@@ -63,13 +63,18 @@ export const Disabled: Story = {
 };
 
 export const AllVariants: Story = {
+  args: {
+    variant: "success",
+    children: "",
+  },
   render: () => (
     <div className="flex flex-wrap gap-4">
-      <ButtonTransparent variant="success">Success</ButtonTransparent>
       <ButtonTransparent variant="warning">Warning</ButtonTransparent>
       <ButtonTransparent variant="danger">Danger</ButtonTransparent>
       <ButtonTransparent variant="info">Info</ButtonTransparent>
       <ButtonTransparent variant="blue">Blue</ButtonTransparent>
+      <ButtonTransparent variant="success">Success</ButtonTransparent>
+      <ButtonTransparent variant="warning">Warning</ButtonTransparent>
     </div>
   ),
 };

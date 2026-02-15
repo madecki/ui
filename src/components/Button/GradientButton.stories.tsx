@@ -54,6 +54,9 @@ export const Disabled: Story = {
 };
 
 export const AllSizes: Story = {
+  args: {
+    children: "",
+  },
   render: () => (
     <div className="flex items-center gap-4">
       <GradientButton size="sm">Small</GradientButton>

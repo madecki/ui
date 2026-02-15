@@ -79,6 +79,10 @@ export const WithoutIcon: Story = {
 };
 
 export const AllVariants: Story = {
+  args: {
+    variant: "info",
+    children: "",
+  },
   render: () => (
     <div className="flex flex-col gap-12 w-96">
       <ContentBox variant="info" icon={<Info />}>
