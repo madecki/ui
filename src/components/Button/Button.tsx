@@ -40,46 +40,40 @@ export const Button = ({
 
   switch (variant) {
     case "primary":
-      const primaryLight =
-        "border-primary text-primary bg-neutral focus:bg-primary";
-      const primaryDark =
-        "dark:text-white dark:bg-gray dark:hover:bg-neutral dark:hover:text-primary";
-      classNames.push(primaryLight, primaryDark);
+      classNames.push(
+        "border-primary text-primary bg-neutral focus:bg-primary",
+        "dark:text-white dark:bg-gray dark:hover:bg-neutral dark:hover:text-primary"
+      );
       break;
     case "success":
-      const successLight =
-        "border-success text-primary bg-neutral focus:bg-primary focus:text-success";
-      const successDark =
-        "dark:text-white dark:bg-gray dark:hover:bg-success";
-      classNames.push(successLight, successDark);
+      classNames.push(
+        "border-success text-primary bg-neutral focus:bg-primary focus:text-success",
+        "dark:text-white dark:bg-gray dark:hover:bg-success"
+      );
       break;
     case "warning":
-      const warningLight =
-        "border-warning text-primary bg-neutral focus:bg-primary focus:text-warning";
-      const warningDark =
-        "dark:text-white dark:bg-gray dark:hover:bg-warning";
-      classNames.push(warningLight, warningDark);
+      classNames.push(
+        "border-warning text-primary bg-neutral focus:bg-primary focus:text-warning",
+        "dark:text-white dark:bg-gray dark:hover:bg-warning"
+      );
       break;
     case "danger":
-      const dangerLight =
-        "border-danger text-primary bg-neutral focus:bg-primary focus:text-danger";
-      const dangerDark =
-        "dark:text-white dark:bg-gray dark:hover:bg-danger";
-      classNames.push(dangerLight, dangerDark);
+      classNames.push(
+        "border-danger text-primary bg-neutral focus:bg-primary focus:text-danger",
+        "dark:text-white dark:bg-gray dark:hover:bg-danger"
+      );
       break;
     case "info":
-      const infoLight =
-        "border-info text-primary bg-neutral focus:bg-primary focus:text-info";
-      const infoDark =
-        "dark:text-white dark:bg-gray dark:hover:bg-info";
-      classNames.push(infoLight, infoDark);
+      classNames.push(
+        "border-info text-primary bg-neutral focus:bg-primary focus:text-info",
+        "dark:text-white dark:bg-gray dark:hover:bg-info"
+      );
       break;
     case "blue":
-      const blueLight =
-        "border-blue text-primary bg-neutral focus:bg-primary focus:text-blue";
-      const blueDark =
-        "dark:text-white dark:bg-gray dark:hover:bg-blue";
-      classNames.push(blueLight, blueDark);
+      classNames.push(
+        "border-blue text-primary bg-neutral focus:bg-primary focus:text-blue",
+        "dark:text-white dark:bg-gray dark:hover:bg-blue"
+      );
       break;
   }
 

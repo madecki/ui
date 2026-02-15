@@ -58,14 +58,6 @@ export const AllSizes: Story = {
 };
 
 // SpinnerOverlay story
-const overlayMeta = {
-  title: "Components/SpinnerOverlay",
-  component: SpinnerOverlay,
-  parameters: {
-    layout: "fullscreen",
-  },
-  tags: ["autodocs"],
-} satisfies Meta<typeof SpinnerOverlay>;
 
 export const Overlay: StoryObj<typeof SpinnerOverlay> = {
   render: () => (
