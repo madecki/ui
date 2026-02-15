@@ -42,6 +42,7 @@
     "lint": "eslint src --ext .ts,.tsx",
     "typecheck": "tsc --noEmit",
     "prepublishOnly": "npm run build",
+    "publish:npm": "./scripts/publish.sh",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
