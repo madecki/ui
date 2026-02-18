@@ -11,6 +11,12 @@ export {
   BlockQuote,
   Hr,
   ContentBox,
+  Container,
+  Stack,
+  Grid,
+  GridItem,
+  Heading,
+  Text,
   type ButtonProps,
   type ButtonTransparentProps,
   type GradientButtonProps,
@@ -23,6 +29,12 @@ export {
   type BlockQuoteProps,
   type HrProps,
   type ContentBoxProps,
+  type ContainerProps,
+  type StackProps,
+  type GridProps,
+  type GridItemProps,
+  type HeadingProps,
+  type TextProps,
 } from "./components";
 
 // Icons

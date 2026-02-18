@@ -27,11 +27,15 @@
         "types": "./dist/tailwind-preset.d.cts",
         "default": "./dist/tailwind-preset.cjs"
       }
-    }
+    },
+    "./llm-context": "./llm-context.md",
+    "./cursor-rule-template": "./cursor-rule-template.md"
   },
   "files": [
     "dist",
-    "README.md"
+    "README.md",
+    "llm-context.md",
+    "cursor-rule-template.md"
   ],
   "sideEffects": [
     "**/*.css"

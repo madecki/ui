@@ -1,0 +1,128 @@
+---
+description: Rules for developing @madecki/ui component library
+globs: **/*.{tsx,jsx,ts,js,md}
+---
+
+# @madecki/ui Library Development Rules
+
+This is the @madecki/ui component library. Follow these rules when making changes.
+
+## Component Structure
+
+All components follow this structure:
+```
+src/components/ComponentName/
+├── ComponentName.tsx    # Main component implementation
+└── index.ts            # Re-exports component and types
+```
+
+### Component Pattern
+
+```tsx
+import { ReactNode } from "react";
+
+export interface ComponentNameProps {
+  children?: ReactNode;
+  variant?: "primary" | "secondary";
+  className?: string;
+}
+
+export const ComponentName = ({
+  children,
+  variant = "primary",
+  className = "",
+}: ComponentNameProps) => {
+  return (
+    <div className={`base-classes ${className}`}>
+      {children}
+    </div>
+  );
+};
+
+export default ComponentName;
+```
+
+### Export Pattern
+
+In `src/components/ComponentName/index.ts`:
+```tsx
+export { ComponentName, type ComponentNameProps } from "./ComponentName";
+```
+
+In `src/components/index.ts`:
+```tsx
+export { ComponentName, type ComponentNameProps } from "./ComponentName";
+```
+
+In `src/index.ts`:
+```tsx
+export { ComponentName, type ComponentNameProps } from "./components";
+```
+
+## CRITICAL: Update LLM Context Files
+
+When you add, remove, or modify components/props, you MUST update these files:
+
+### 1. `llm-context.md` (root)
+- Add/update component in the appropriate section
+- Include all props with their types and defaults
+- Update usage examples if needed
+
+### 2. `cursor-rule-template.md` (root)
+- Add component to the component list
+- Keep it concise (this is a quick reference)
+
+### 3. `README.md`
+- Add full documentation for new components
+- Update props tables if API changes
+
+## File Update Checklist
+
+When modifying components, update these files in order:
+
+1. [ ] Component implementation (`src/components/*/`)
+2. [ ] Component index (`src/components/*/index.ts`)
+3. [ ] Components barrel (`src/components/index.ts`)
+4. [ ] Main exports (`src/index.ts`)
+5. [ ] LLM context (`llm-context.md`)
+6. [ ] Cursor template (`cursor-rule-template.md`)
+7. [ ] README documentation (`README.md`)
+
+## Design Tokens
+
+Always use these tokens, never arbitrary values:
+
+### Colors
+`primary`, `darkgray`, `gray`, `lightgray`, `icongray`, `white`, `success`, `danger`, `warning`, `info`, `blue`, `neutral`
+
+### Spacing
+`1`-`21` (defined in tailwind-preset.ts and globals.css)
+
+### Typography
+`xs`, `sm`, `md`, `lg`, `xl`, `2xl`, `3xl`, `4xl`
+
+### Border Radius
+`sm`, `smb`, `md`, `mdb`, `circle`
+
+## Dark Mode
+
+All components must support dark mode using `dark:` prefix:
+```tsx
+<div className="bg-primary dark:bg-darkgray text-white">
+```
+
+## TypeScript
+
+- Export all prop interfaces
+- Use strict types (avoid `any`)
+- Props should have sensible defaults
+- Use `ReactNode` for children, not `React.ReactNode`
+
+## Testing Changes
+
+Before committing:
+```bash
+npm run typecheck  # Verify types
+npm run build      # Verify build
+npm run storybook  # Visual verification
+```
