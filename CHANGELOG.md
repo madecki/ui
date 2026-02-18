@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/madecki/ui/compare/v1.0.0...v1.1.0) (2026-02-18)
+
+
+### Features
+
+* prepare for usage in other apps using LLM ([c039d3b](https://github.com/madecki/ui/commit/c039d3b9df4b4834ba346b3f6ef7fb8e35d1d86d))
+
 # 1.0.0 (2026-02-15)
 
 
