@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/madecki/ui/compare/v1.1.0...v1.2.0) (2026-02-20)
+
+
+### Features
+
+* cursor rules improved, storybook enriched ([92db63a](https://github.com/madecki/ui/commit/92db63aacb67cecae65eaf56411af4e94e7403d4))
+
 # [1.1.0](https://github.com/madecki/ui/compare/v1.0.0...v1.1.0) (2026-02-18)
 
 
