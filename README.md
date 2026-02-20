@@ -133,11 +133,14 @@ Copy the rule template to your MFE project:
 # Create the rules directory
 mkdir -p .cursor/rules
 
-# Copy the template (adjust path to your node_modules)
+# Copy the template
 cp node_modules/@madecki/ui/cursor-rule-template.md .cursor/rules/madecki-ui.mdc
 ```
 
-Or manually create `.cursor/rules/madecki-ui.mdc` with content from `cursor-rule-template.md`.
+**Why this works:** The rule tells the AI to read `node_modules/@madecki/ui/llm-context.md` at runtime. This means:
+- The rule file is static and rarely changes
+- The actual component docs are read from whatever version is installed
+- Updating `@madecki/ui` automatically updates what the AI sees
 
 #### Option B: Point AI to Documentation
 

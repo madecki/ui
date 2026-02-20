@@ -6,90 +6,60 @@ Copy the content below to `.cursor/rules/madecki-ui.mdc` in your MFE project:
 
 ```markdown
 ---
-description: Rules for using @madecki/ui component library
-globs: **/*.{tsx,jsx,ts,js}
+description: Use @madecki/ui component library for all UI development
+alwaysApply: true
 ---
 
 # @madecki/ui Component Library
 
-This project uses @madecki/ui for UI components. ALWAYS use library components instead of creating custom ones.
+This project uses @madecki/ui for UI components. This rule applies to ALL frontend development tasks.
 
-## Required: Check Library First
+## IMPORTANT: Read Library Documentation First
 
-Before creating ANY UI component, check if @madecki/ui has it:
+Before creating ANY UI component or writing frontend code, read the library's context file:
 
-### Layout
-- `Container` - Page wrapper with max-width
-- `Stack` - Vertical/horizontal flex layout
-- `Grid` / `GridItem` - CSS grid layout
+**Read this file:** `node_modules/@madecki/ui/llm-context.md`
 
-### Typography
-- `Heading` - h1-h6 with consistent styling
-- `Text` - Body text with variants
+This file contains:
+- All available components and their props
+- Design tokens (colors, spacing, typography)
+- Usage patterns and examples
+- Rules for consistent usage
 
-### Interactive
-- `Button`, `ButtonTransparent`, `GradientButton` - Buttons
-- `Input` - Form inputs
-- `Tabs` - Tab navigation
-- `RadioButtons` - Radio groups
+## When This Applies
 
-### Feedback
-- `Spinner`, `SpinnerOverlay` - Loading states
-- `ContentBox` - Info/warning/success/danger boxes
+- Creating new pages or components
+- Building forms, layouts, or navigation
+- Adding buttons, inputs, or any interactive elements
+- Styling with Tailwind CSS
+- Setting up a new frontend project
 
-### Content
-- `BlockQuote`, `Hr` - Content elements
+## Quick Rules
 
-### Icons
-- `Heart`, `Share`, `Search`, `Info`, `Warning`
-- `TwitterIcon`, `LinkedInIcon`, `InstagramIcon`
+1. ALWAYS read `node_modules/@madecki/ui/llm-context.md` before creating UI
+2. ALWAYS import from "@madecki/ui", never create custom versions of library components
+3. ALWAYS use design tokens from the library (e.g., `bg-primary`, `p-5`, `text-lg`)
+4. NEVER use arbitrary Tailwind values like `bg-[#123456]` or `p-[17px]`
 
 ## Import Pattern
 
-```tsx
+\`\`\`tsx
 import { Container, Stack, Heading, Text, Button } from "@madecki/ui";
 import { Heart, Info } from "@madecki/ui";
-```
+\`\`\`
 
-## Design Tokens
+## When Starting a New Project
 
-ALWAYS use these Tailwind classes, NEVER arbitrary values:
+1. Install the library: `npm install @madecki/ui`
+2. Configure Tailwind to use the preset (see README)
+3. Read `node_modules/@madecki/ui/llm-context.md` for available components
+4. Use library components for all UI elements
 
-### Colors
-`primary`, `darkgray`, `gray`, `lightgray`, `icongray`, `white`, `success`, `danger`, `warning`, `info`, `blue`, `neutral`
+## When Unsure
 
-### Spacing (gap, padding, margin)
-`1`-`10` (4px to 40px scale)
+If you're not sure what components are available or how to use them:
 
-### Typography
-`xs`, `sm`, `md`, `lg`, `xl`, `2xl`, `3xl`, `4xl`
-
-### Border Radius
-`sm` (10px), `md` (20px), `circle` (50%)
-
-## Page Structure Pattern
-
-```tsx
-import { Container, Stack, Heading, Text } from "@madecki/ui";
-
-export function Page() {
-  return (
-    <Container size="lg">
-      <Stack gap="6">
-        <Heading level={1}>Page Title</Heading>
-        <Text color="muted">Page description</Text>
-        {/* Content */}
-      </Stack>
-    </Container>
-  );
-}
-```
-
-## Rules
-
-1. NEVER create custom Button, Input, Heading, or Text components
-2. NEVER use arbitrary Tailwind values like `bg-[#123456]` or `p-[17px]`
-3. ALWAYS use `Container` for page wrappers
-4. ALWAYS use `Stack` or `Grid` for component layouts
-5. ALWAYS support dark mode when adding custom styles
+1. Read `node_modules/@madecki/ui/llm-context.md` for quick reference
+2. Read `node_modules/@madecki/ui/README.md` for full documentation
+3. Check TypeScript types for prop definitions
 ```
