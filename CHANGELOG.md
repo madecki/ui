@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/madecki/ui/compare/v1.2.0...v1.2.1) (2026-03-19)
+
+
+### Bug Fixes
+
+* proper behavior of danger radio button ([72865f3](https://github.com/madecki/ui/commit/72865f3f0f83bf560b0f431676a8f6700ba43805))
+
 # [1.2.0](https://github.com/madecki/ui/compare/v1.1.0...v1.2.0) (2026-02-20)
 
 
