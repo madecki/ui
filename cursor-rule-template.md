@@ -48,12 +48,33 @@ import { Container, Stack, Heading, Text, Button } from "@madecki/ui";
 import { Heart, Info } from "@madecki/ui";
 \`\`\`
 
+## Setup (Required)
+
+When setting up or onboarding a new project, ensure these are in place before any UI work:
+
+**globals.css (or app.css)**
+
+```css
+@import "tailwindcss";
+@config "@madecki/ui/tailwind-preset";
+@source "./node_modules/@madecki/ui/dist/**/*.{js,cjs}";
+```
+
+The `@config` directive is mandatory — it activates `darkMode: "class"` and all design tokens. Without it, dark mode and custom colors won't work regardless of other Tailwind configuration.
+
+**Root layout**
+
+```tsx
+<html className="dark">  {/* library is dark-mode first */}
+```
+
 ## When Starting a New Project
 
 1. Install the library: `npm install @madecki/ui`
-2. Configure Tailwind to use the preset (see README)
-3. Read `node_modules/@madecki/ui/llm-context.md` for available components
-4. Use library components for all UI elements
+2. Add the `globals.css` setup above
+3. Add `className="dark"` to the root `<html>` element
+4. Read `node_modules/@madecki/ui/llm-context.md` for available components
+5. Use library components for all UI elements
 
 ## When Unsure
 

@@ -2,6 +2,26 @@
 
 This file provides context for AI assistants building apps with the @madecki/ui component library.
 
+## Setup (Required — do this before any UI work)
+
+### globals.css
+
+```css
+@import "tailwindcss";
+@config "@madecki/ui/tailwind-preset";
+@source "./node_modules/@madecki/ui/dist/**/*.{js,cjs}";
+```
+
+The `@config` directive is mandatory — it activates `darkMode: "class"` and all design tokens. Without it, dark mode and custom colors won't work in Tailwind v4 regardless of other configuration.
+
+### Root layout
+
+```tsx
+<html className="dark">  {/* library is dark-mode first */}
+```
+
+The library is designed dark-mode first. Always add `class="dark"` to the `<html>` element.
+
 ## IMPORTANT: Always use @madecki/ui components
 
 When building UI, ALWAYS check if @madecki/ui has a component before creating custom ones.
@@ -19,7 +39,8 @@ When building UI, ALWAYS check if @madecki/ui has a component before creating cu
 - `Text` - Body text. Props: `as?: "p"|"span"|"div"|"label"`, `size?: "xs"|"sm"|"md"|"lg"`, `weight?: "normal"|"medium"|"semibold"|"bold"`, `color?: "default"|"muted"|"primary"|"success"|"warning"|"danger"`
 
 ### Buttons
-- `Button` - Primary button. Props: `variant?: "primary"|"success"|"warning"|"danger"|"info"`, `size?: "sm"|"md"|"lg"`
+- `Button` - Primary button. Props: `variant: "primary"|"success"|"warning"|"danger"|"info"|"blue"`, `size?: "xs"|"sm"|"md"|"lg"`, `isActive?: boolean` (requires `id` prop; shows × icon; when active, `onClick` is called with no argument — use this to detect deselect), `label?: string`, `id?: string`, `disabled?: boolean`
+  - **Note:** `variant` values `"white"`, `"gray"`, `"lightGray"`, `"darkGray"`, and `"neutral"` exist in the type but render with no background or border color. Do not use them on `Button`. Use only the six variants listed above.
 - `ButtonTransparent` - Outlined button. Same props as Button.
 - `GradientButton` - Gradient border button. Props: `size?: "sm"|"md"|"lg"`
 - `RadioButtons` - Radio group. Props: `name: string`, `options: {label, value}[]`, `onChange: (value) => void`

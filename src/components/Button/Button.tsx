@@ -38,41 +38,64 @@ export const Button = ({
 
   classNames.push(textColor);
 
+  const activeBgMap: Partial<Record<ColorVariants, string>> = {
+    primary: "bg-primary",
+    success: "bg-success",
+    warning: "bg-warning",
+    danger: "bg-danger",
+    info: "bg-info",
+    blue: "bg-blue",
+  };
+
+  const bg = isActive === true ? activeBgMap[variant] : "bg-neutral";
+
   switch (variant) {
     case "primary":
       classNames.push(
-        "border-primary text-primary bg-neutral focus:bg-primary",
-        "dark:text-white dark:bg-gray dark:hover:bg-neutral dark:hover:text-primary"
+        `border-primary text-primary ${bg} focus:bg-primary`,
+        isActive === true
+          ? "dark:bg-neutral dark:text-primary"
+          : "dark:text-white dark:bg-gray dark:hover:bg-neutral dark:hover:text-primary"
       );
       break;
     case "success":
       classNames.push(
-        "border-success text-primary bg-neutral focus:bg-primary focus:text-success",
-        "dark:text-white dark:bg-gray dark:hover:bg-success"
+        `border-success text-primary ${bg} focus:bg-primary focus:text-success`,
+        isActive === true
+          ? "dark:bg-success"
+          : "dark:text-white dark:bg-gray dark:hover:bg-success"
       );
       break;
     case "warning":
       classNames.push(
-        "border-warning text-primary bg-neutral focus:bg-primary focus:text-warning",
-        "dark:text-white dark:bg-gray dark:hover:bg-warning"
+        `border-warning text-primary ${bg} focus:bg-primary focus:text-warning`,
+        isActive === true
+          ? "dark:bg-warning"
+          : "dark:text-white dark:bg-gray dark:hover:bg-warning"
       );
       break;
     case "danger":
       classNames.push(
-        "border-danger text-primary bg-neutral focus:bg-primary focus:text-danger",
-        "dark:text-white dark:bg-gray dark:hover:bg-danger"
+        `border-danger text-primary ${bg} focus:bg-primary focus:text-danger`,
+        isActive === true
+          ? "dark:bg-danger"
+          : "dark:text-white dark:bg-gray dark:hover:bg-danger"
       );
       break;
     case "info":
       classNames.push(
-        "border-info text-primary bg-neutral focus:bg-primary focus:text-info",
-        "dark:text-white dark:bg-gray dark:hover:bg-info"
+        `border-info text-primary ${bg} focus:bg-primary focus:text-info`,
+        isActive === true
+          ? "dark:bg-info"
+          : "dark:text-white dark:bg-gray dark:hover:bg-info"
       );
       break;
     case "blue":
       classNames.push(
-        "border-blue text-primary bg-neutral focus:bg-primary focus:text-blue",
-        "dark:text-white dark:bg-gray dark:hover:bg-blue"
+        `border-blue text-primary ${bg} focus:bg-primary focus:text-blue`,
+        isActive === true
+          ? "dark:bg-blue"
+          : "dark:text-white dark:bg-gray dark:hover:bg-blue"
       );
       break;
   }
@@ -90,26 +113,6 @@ export const Button = ({
     case "lg":
       classNames.push("text-lg py-5 px-8");
       break;
-  }
-
-  if (isActive === true) {
-    switch (variant) {
-      case "primary":
-        classNames.push("bg-primary dark:bg-neutral dark:text-primary");
-        break;
-      case "success":
-        classNames.push("dark:bg-success");
-        break;
-      case "warning":
-        classNames.push("dark:bg-warning");
-        break;
-      case "danger":
-        classNames.push("dark:bg-danger");
-        break;
-      case "info":
-        classNames.push("dark:bg-info");
-        break;
-    }
   }
 
   if (disabled) {
