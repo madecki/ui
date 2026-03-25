@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/madecki/ui/compare/v1.3.0...v1.4.0) (2026-03-25)
+
+
+### Features
+
+* add Select combobox with search, multi, and tests ([d8c0f8b](https://github.com/madecki/ui/commit/d8c0f8b85da4fa0efb47999fc99bc4adb2952977))
+
 # [1.3.0](https://github.com/madecki/ui/compare/v1.2.1...v1.3.0) (2026-03-25)
 
 
