@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/madecki/ui/compare/v1.2.1...v1.3.0) (2026-03-25)
+
+
+### Features
+
+* add Tag component and shared surface with Button ([5e8ed15](https://github.com/madecki/ui/commit/5e8ed15c14cbe1b1b69a59c40ab3e0a3bdd57976))
+
 ## [1.2.1](https://github.com/madecki/ui/compare/v1.2.0...v1.2.1) (2026-03-19)
 
 
