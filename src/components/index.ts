@@ -10,6 +10,9 @@ export {
   type RadioButtonsProps,
 } from "./Button";
 
+// Tag
+export { Tag, type TagProps } from "./Tag";
+
 // Input
 export { Input, type InputProps } from "./Input";
 
