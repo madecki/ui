@@ -16,6 +16,15 @@ export { Tag, type TagProps } from "./Tag";
 // Input
 export { Input, type InputProps } from "./Input";
 
+// Select
+export {
+  Select,
+  type SelectProps,
+  type SelectOption,
+  type SingleSelectProps,
+  type MultiSelectProps,
+} from "./Select";
+
 // Tabs
 export { Tabs, type Tab, type TabsProps } from "./Tabs";
 
