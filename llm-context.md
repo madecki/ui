@@ -47,7 +47,7 @@ When building UI, ALWAYS check if @madecki/ui has a component before creating cu
 - `RadioButtons` - Radio group. Props: `name: string`, `options: {label, value}[]`, `onChange: (value) => void`
 
 ### Forms
-- `Input` - Text input. Props: `name: string`, `label: string`, `placeholder?: string`, `type?: string`, `variant?: "primary"|"secondary"|"tertiary"`, `onChange?: (value) => void`
+- `Input` - Text input. Props: `name`, `label`, `onChange?: (value: string) => void`, optional **`value`** (controlled) or **`defaultValue`** (uncontrolled initial only), `placeholder?`, **`type?`** (any standard HTML input type from React’s `HTMLInputTypeAttribute`, including `date`, `time`, `datetime-local`, etc.), **`maxLength?`**, `variant?`, `required?`, `pattern?`, `title?`, `ariaLabel?`, `spellCheck?`, `disabled?`, `className?`, `icon?`, **`testId?`** (`data-testid` on the native `<input>` for Playwright). See below for controlled vs uncontrolled and testing.
 - `Select` - Combobox styled like `Input`, with trailing chevron. Props: `name`, `label`, `options: { value, label }[]`, `placeholder?`, `variant?` (same as Input), `disabled?`, `className?`, `testId?`. Typing filters the list. **Single (default):** `value?`, `defaultValue?`, `onChange?: (value: string) => void`. **Multi:** `multi={true}`, `value?`, `defaultValue?`, `onChange?: (value: string[]) => void`. The dropdown is absolutely positioned under the field so it does not shift surrounding layout. See below for controlled vs uncontrolled and testing.
 
 ### Navigation
@@ -126,6 +126,20 @@ import { Input, Select, Button, Stack } from "@madecki/ui";
   <Button variant="primary">Submit</Button>
 </Stack>
 ```
+
+### Input — controlled vs uncontrolled
+
+| Mode | What you pass | Who owns the text |
+|------|----------------|-------------------|
+| **Controlled** | `value` (+ `onChange`) | The parent. The field always shows `value`. Update parent state in `onChange` (including for Playwright `fill`) or the UI will not match. |
+| **Uncontrolled** | No `value`; optionally `defaultValue` | The `Input` component. `defaultValue` applies on first mount only; it does not resync if the prop changes later (remount with a `key` if you need that). |
+
+If **`value !== undefined`**, the input is controlled (including **`value=""`**).
+
+### Input — testing
+
+- Prefer **`testId`** so Playwright can target `getByTestId("…")` on the real `<input>` without a generic `locator("input")`.
+- With **controlled** `value` + `onChange`, `fill()` / typing stay in sync as long as the parent updates state from `onChange` (no `onInputCapture` workaround needed).
 
 ### Select — controlled vs uncontrolled
 

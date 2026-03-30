@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { useState } from "react";
 import { Input } from "./Input";
 import { Search } from "../../icons";
 
@@ -16,7 +17,18 @@ const meta = {
     },
     type: {
       control: "select",
-      options: ["text", "email", "password", "number", "search", "tel", "url"],
+      options: [
+        "text",
+        "email",
+        "password",
+        "number",
+        "search",
+        "tel",
+        "url",
+        "date",
+        "time",
+        "datetime-local",
+      ],
     },
   },
 } satisfies Meta<typeof Input>;
@@ -101,6 +113,55 @@ export const WithDefaultValue: Story = {
     name: "prefilled-input",
     label: "Prefilled Input",
     defaultValue: "Hello World",
+  },
+};
+
+function ControlledInputStory() {
+  const [value, setValue] = useState("Controlled text");
+  return (
+    <Input
+      name="controlled-input"
+      label="Controlled"
+      value={value}
+      onChange={setValue}
+      testId="story-controlled-input"
+    />
+  );
+}
+
+export const Controlled: Story = {
+  args: {
+    name: "controlled-input",
+    label: "Controlled",
+  },
+  render: () => <ControlledInputStory />,
+};
+
+export const WithMaxLength: Story = {
+  args: {
+    name: "maxlen-input",
+    label: "Max 20 characters",
+    placeholder: "Up to 20 chars",
+    maxLength: 20,
+    testId: "story-maxlen-input",
+  },
+};
+
+export const WithTestId: Story = {
+  args: {
+    name: "e2e-input",
+    label: "E2E hook",
+    placeholder: "data-testid on input",
+    testId: "login-email",
+  },
+};
+
+export const DateType: Story = {
+  args: {
+    name: "date-input",
+    label: "Date",
+    type: "date",
+    testId: "story-date-input",
   },
 };
 
