@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/madecki/ui/compare/v1.4.0...v1.5.0) (2026-03-30)
+
+
+### Features
+
+* **input:** controlled mode, maxLength, testId, and full input types ([1d81e63](https://github.com/madecki/ui/commit/1d81e63399abc94e6e201b5df267ce5e142cd922))
+
 # [1.4.0](https://github.com/madecki/ui/compare/v1.3.0...v1.4.0) (2026-03-25)
 
 
