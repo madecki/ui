@@ -424,6 +424,47 @@ Full-screen loading overlay.
 <SpinnerOverlay isVisible={isLoading} />
 ```
 
+#### Toast
+
+Fixed-position message in any screen corner, with configurable auto-dismiss (milliseconds) and a close control. Border colors match semantic tokens (`info` uses the same blue accent as `ContentBox`).
+
+```tsx
+import { Toast } from "@madecki/ui";
+import { useState } from "react";
+
+function Example() {
+  const [toastKey, setToastKey] = useState(0);
+
+  return (
+    <>
+      <button type="button" onClick={() => setToastKey((n) => n + 1)}>
+        Save
+      </button>
+      {toastKey > 0 ? (
+        <Toast
+          key={toastKey}
+          variant="success"
+          placement="bottom-right"
+          autoCloseMs={4000}
+          onClose={() => setToastKey(0)}
+        >
+          <p className="text-white">Saved.</p>
+        </Toast>
+      ) : null}
+    </>
+  );
+}
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | (required) | Message body (use `Text` / markup as needed). |
+| `variant` | `"info"` \| `"success"` \| `"danger"` | `"info"` | Semantic style (border / live region). |
+| `placement` | `"top-left"` \| `"top-right"` \| `"bottom-left"` \| `"bottom-right"` | `"bottom-right"` | Viewport corner (`fixed`, offset with spacing token `5`). |
+| `autoCloseMs` | `number` | `5000` | Auto-dismiss delay in ms; use `0` to disable. |
+| `onClose` | `() => void` | — | Fired when the toast is dismissed (timer or close control). |
+| `className` | `string` | `""` | Extra classes on the root element. |
+
 ### Content Components
 
 #### BlockQuote

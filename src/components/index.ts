@@ -41,6 +41,14 @@ export {
   type SpinnerOverlayProps,
 } from "./Spinner";
 
+// Toast
+export {
+  Toast,
+  type ToastProps,
+  type ToastVariant,
+  type ToastPlacement,
+} from "./Toast";
+
 // BlockQuote
 export { BlockQuote, type BlockQuoteProps } from "./BlockQuote";
 

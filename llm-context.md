@@ -70,6 +70,7 @@ Export **`LabelVisibility`** from `@madecki/ui` for typing `labelVisibility` pro
 ### Feedback
 - `Spinner` - Loading spinner. Props: `size?: "sm"|"md"|"lg"`
 - `SpinnerOverlay` - Full-screen loader. Props: `isVisible: boolean`
+- `Toast` - Fixed corner notification. Props: `children: ReactNode`, `variant?: "info"|"success"|"danger"` (default `"info"`), `placement?: "top-left"|"top-right"|"bottom-left"|"bottom-right"` (default `"bottom-right"`), `autoCloseMs?: number` (default `5000`; pass `0` to disable auto-close), `onClose?: () => void`, `className?: string`. Dismissible with a close control; calls `onClose` when auto-closed or closed manually. Uses `role="alert"` / `aria-live="assertive"` for `danger`, otherwise `role="status"` / `aria-live="polite"`.
 - `ContentBox` - Info/warning boxes. Props: `variant?: "info"|"warning"|"success"|"danger"`, `icon?: ReactNode`
 - `DetailsPanel` - Native `<details>` / `<summary>` disclosure styled like `ContentBox`. Props: **`summary: ReactNode`** (summary row), **`children: ReactNode`** (body when expanded), `variant?: "info"|"warning"|"success"|"danger"` (default `"info"`), `icon?: ReactNode` (inline before summary text), `defaultOpen?: boolean`, `className?: string`, `id?: string`
 
