@@ -71,6 +71,7 @@ Export **`LabelVisibility`** from `@madecki/ui` for typing `labelVisibility` pro
 - `Spinner` - Loading spinner. Props: `size?: "sm"|"md"|"lg"`
 - `SpinnerOverlay` - Full-screen loader. Props: `isVisible: boolean`
 - `ContentBox` - Info/warning boxes. Props: `variant?: "info"|"warning"|"success"|"danger"`, `icon?: ReactNode`
+- `DetailsPanel` - Native `<details>` / `<summary>` disclosure styled like `ContentBox`. Props: **`summary: ReactNode`** (summary row), **`children: ReactNode`** (body when expanded), `variant?: "info"|"warning"|"success"|"danger"` (default `"info"`), `icon?: ReactNode` (inline before summary text), `defaultOpen?: boolean`, `className?: string`, `id?: string`
 
 ### Content
 - `BlockQuote` - Styled quote. Props: `children: ReactNode`

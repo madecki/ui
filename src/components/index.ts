@@ -50,6 +50,9 @@ export { Hr, type HrProps } from "./Hr";
 // ContentBox
 export { ContentBox, type ContentBoxProps } from "./ContentBox";
 
+// DetailsPanel
+export { DetailsPanel, type DetailsPanelProps } from "./DetailsPanel";
+
 // Layout
 export {
   Container,

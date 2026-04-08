@@ -452,6 +452,37 @@ import { ContentBox, Info, Warning } from "@madecki/ui";
 </ContentBox>
 ```
 
+#### DetailsPanel
+
+Collapsible panel using native **`<details>`** and **`<summary>`** (accessible disclosure), with the same border variants as `ContentBox`.
+
+```tsx
+import { DetailsPanel, Info } from "@madecki/ui";
+
+<DetailsPanel variant="info" summary="Show more">
+  <p className="text-white">Extra content appears here when expanded.</p>
+</DetailsPanel>
+
+<DetailsPanel
+  variant="warning"
+  icon={<Info />}
+  defaultOpen
+  summary="Important details"
+>
+  <p className="text-white">Initially open; still toggles like a normal details element.</p>
+</DetailsPanel>
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `summary` | `ReactNode` | (required) | Content of the `<summary>` row (click to toggle). |
+| `children` | `ReactNode` | (required) | Panel body shown when open. |
+| `variant` | `"info"` \| `"warning"` \| `"success"` \| `"danger"` | `"info"` | Border color (matches `ContentBox`). |
+| `icon` | `ReactNode` | — | Optional icon before the summary text. |
+| `defaultOpen` | `boolean` | `false` | Initial open state; toggling still uses native `<details>` behavior (open state is synced in React so `defaultOpen` works reliably). |
+| `className` | `string` | `""` | Extra classes on `<details>`. |
+| `id` | `string` | — | `id` on `<details>`. |
+
 #### Hr
 
 Styled horizontal rule.

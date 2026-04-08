@@ -1,18 +1,15 @@
 import { ReactNode } from "react";
+import {
+  contentBoxVariantBorderClasses,
+  type ContentBoxVariant,
+} from "../contentBoxVariants";
 
 export interface ContentBoxProps {
   children: ReactNode;
-  variant?: "info" | "warning" | "success" | "danger";
+  variant?: ContentBoxVariant;
   icon?: ReactNode;
   className?: string;
 }
-
-const variantStyles = {
-  info: "border-blue",
-  warning: "border-warning",
-  success: "border-success",
-  danger: "border-danger",
-};
 
 export const ContentBox = ({
   children,
@@ -22,7 +19,7 @@ export const ContentBox = ({
 }: ContentBoxProps) => {
   return (
     <div
-      className={`relative border rounded-md my-9 ${variantStyles[variant]} ${className}`}
+      className={`relative border rounded-md my-9 ${contentBoxVariantBorderClasses[variant]} ${className}`}
     >
       {icon && (
         <div className="absolute flex items-center justify-center p-3 -top-6 right-8 bg-primary border border-darkgray">

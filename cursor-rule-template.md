@@ -44,7 +44,7 @@ This file contains:
 ## Import Pattern
 
 \`\`\`tsx
-import { Container, Stack, Heading, Text, Button } from "@madecki/ui";
+import { Container, Stack, Heading, Text, Button, DetailsPanel } from "@madecki/ui";
 import { Heart, Info } from "@madecki/ui";
 \`\`\`
 
