@@ -79,6 +79,10 @@ function ControlledTextareaStory() {
 }
 
 export const Controlled: Story = {
+  args: {
+    name: "controlled-textarea",
+    label: "Controlled",
+  },
   render: () => <ControlledTextareaStory />,
 };
 
