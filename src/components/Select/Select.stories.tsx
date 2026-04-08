@@ -2,11 +2,13 @@ import type { Meta, StoryObj } from "@storybook/react";
 import type { ComponentType } from "react";
 import { useState } from "react";
 import { Select, type SelectOption } from "./Select";
+import type { LabelVisibility } from "../FormFieldLabel";
 
 /** Widened args so Storybook can type stories; runtime props still match `Select`. */
 type SelectStoryArgs = {
   name: string;
   label: string;
+  labelVisibility?: LabelVisibility;
   options: SelectOption[];
   placeholder?: string;
   variant?: "primary" | "secondary" | "tertiary";
@@ -104,6 +106,16 @@ export const Disabled: Story = {
     label: "Disabled",
     options: sampleOptions,
     disabled: true,
+  },
+};
+
+export const LabelSrOnly: Story = {
+  args: {
+    name: "select-sr-label",
+    label: "Hidden visually",
+    labelVisibility: "sr-only",
+    options: sampleOptions,
+    placeholder: "Label is screen-reader only",
   },
 };
 

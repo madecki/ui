@@ -2,6 +2,15 @@
 
 This file provides context for AI assistants building apps with the @madecki/ui component library.
 
+## Changelog and versioning
+
+When upgrading **`@madecki/ui`**, read **`CHANGELOG.md`** for breaking changes, new components, and API adjustments. Release notes are **generated on publish** from [Conventional Commits](https://www.conventionalcommits.org/) on **`main`** only (not hand-edited). The **latest** npm version is always the **topmost** `## [x.y.z]` section and should match **`package.json` `"version"`** in the installed tarball. The same file ships with the package and is addressable as:
+
+- Path: `node_modules/@madecki/ui/CHANGELOG.md`
+- Export: `@madecki/ui/CHANGELOG.md`
+
+Always align code with the **semver** of the version you install (**major** bumps may include breaking changes).
+
 ## Setup (Required — do this before any UI work)
 
 ### globals.css
@@ -36,7 +45,7 @@ When building UI, ALWAYS check if @madecki/ui has a component before creating cu
 
 ### Typography
 - `Heading` - Headings h1-h6. Props: `level?: 1-6`, `size?: "xs"|"sm"|"md"|"lg"|"xl"|"2xl"|"3xl"|"4xl"`, `weight?: "normal"|"medium"|"semibold"|"bold"`, `color?: "default"|"muted"|"primary"|"success"|"warning"|"danger"`
-- `Text` - Body text. Props: `as?: "p"|"span"|"div"|"label"`, `size?: "xs"|"sm"|"md"|"lg"`, `weight?: "normal"|"medium"|"semibold"|"bold"`, `color?: "default"|"muted"|"primary"|"success"|"warning"|"danger"`
+- `Text` - Body text. Props: `id?`, `as?: "p"|"span"|"div"|"label"`, `size?: "xs"|"sm"|"md"|"lg"`, `weight?: "normal"|"medium"|"semibold"|"bold"`, `color?: "default"|"muted"|"primary"|"success"|"warning"|"danger"`
 
 ### Buttons & tags
 - `Button` - Primary button. Shares visual styling with `Tag`. Interactive: `cursor-pointer` when enabled, hover affordances in dark mode, `cursor-not-allowed` when `disabled`. Props: `variant: "primary"|"success"|"warning"|"danger"|"info"|"blue"`, `size?: "xs"|"sm"|"md"|"lg"`, `isActive?: boolean` (requires `id` prop; shows × icon; when active, `onClick` is called with no argument — use this to detect deselect), `label?: string`, `id?: string`, `disabled?: boolean`, `type?: "button"|"submit"|"reset"`
@@ -44,11 +53,16 @@ When building UI, ALWAYS check if @madecki/ui has a component before creating cu
 - `Tag` - Non-interactive label/chip: same `variant` / `size` / look as `Button`, rendered as `<span>`. No `:hover` styles; default cursor (or `cursor-default` when `muted`). Props: `variant`, `size?`, `label?` / `children`, `className?`, `filled?` (filled background like an active button, without the × icon), `muted?` (reduced emphasis, same opacity treatment as a disabled button). Use `Button` when the control must be clickable.
 - `ButtonTransparent` - Outlined button. Same props as Button.
 - `GradientButton` - Gradient border button. Props: `size?: "sm"|"md"|"lg"`
-- `RadioButtons` - Radio group. Props: `name: string`, `options: {label, value}[]`, `onChange: (value) => void`
+- `RadioButtons` - Segmented control styled as buttons; exposed as a **radiogroup** with `role="radio"` / `aria-checked` on each option. Props: **`label`** (group label, visible by default), **`labelVisibility?: "visible" | "sr-only"`** (default `"visible"`), `items: Omit<ButtonProps, "size"|"onClick"|"isActive"|"role"|"ariaChecked">[]` (each item needs `id` and `variant`, plus `label` or `children`), `onChange: (value: string) => void`, `size?`, `className?`
 
 ### Forms
-- `Input` - Text input. Props: `name`, `label`, `onChange?: (value: string) => void`, optional **`value`** (controlled) or **`defaultValue`** (uncontrolled initial only), `placeholder?`, **`type?`** (any standard HTML input type from React’s `HTMLInputTypeAttribute`, including `date`, `time`, `datetime-local`, etc.), **`maxLength?`**, `variant?`, `required?`, `pattern?`, `title?`, `ariaLabel?`, `spellCheck?`, `disabled?`, `className?`, `icon?`, **`testId?`** (`data-testid` on the native `<input>` for Playwright). See below for controlled vs uncontrolled and testing.
-- `Select` - Combobox styled like `Input`, with trailing chevron. Props: `name`, `label`, `options: { value, label }[]`, `placeholder?`, `variant?` (same as Input), `disabled?`, `className?`, `testId?`. Typing filters the list. **Single (default):** `value?`, `defaultValue?`, `onChange?: (value: string) => void`. **Multi:** `multi={true}`, `value?`, `defaultValue?`, `onChange?: (value: string[]) => void`. The dropdown is absolutely positioned under the field so it does not shift surrounding layout. See below for controlled vs uncontrolled and testing.
+Shared: **`labelVisibility?: "visible" | "sr-only"`** (default **`"visible"`**) on `Input`, `Textarea`, `Select`, and `RadioButtons` — use **`"sr-only"`** when the label must stay in the DOM for assistive tech but not be shown visually.
+
+- `Input` - Text input. Props: `name`, `label`, `labelVisibility?`, `onChange?: (value: string) => void`, optional **`value`** (controlled) or **`defaultValue`** (uncontrolled initial only), `placeholder?`, **`type?`** (any standard HTML input type from React’s `HTMLInputTypeAttribute`, including `date`, `time`, `datetime-local`, etc.), **`maxLength?`**, `variant?`, `required?`, `pattern?`, `title?`, **`ariaLabel?`** (optional override; omit when the visible `<label>` is enough), `spellCheck?`, `disabled?`, `className?`, `icon?`, **`testId?`** (`data-testid` on the native `<input>` for Playwright). See below for controlled vs uncontrolled and testing.
+- `Textarea` - Multi-line field, same variants and label pattern as `Input`. Props: `name`, `label`, `labelVisibility?`, `onChange?`, `value?`, `defaultValue?`, `placeholder?`, `variant?`, `rows?` (default 4), `maxLength?`, `required?`, `ariaLabel?`, `spellCheck?`, `disabled?`, `className?`, `testId?`.
+- `Select` - Combobox styled like `Input`, with trailing chevron. Props: `name`, `label`, `labelVisibility?`, `options: { value, label }[]`, `placeholder?`, `variant?` (same as Input), `disabled?`, `className?`, `testId?`. Typing filters the list. **Single (default):** `value?`, `defaultValue?`, `onChange?: (value: string) => void`. **Multi:** `multi={true}`, `value?`, `defaultValue?`, `onChange?: (value: string[]) => void`. The dropdown is absolutely positioned under the field so it does not shift surrounding layout. The listbox is named via **`aria-labelledby`** pointing at the field label. See below for controlled vs uncontrolled and testing.
+
+Export **`LabelVisibility`** from `@madecki/ui` for typing `labelVisibility` props.
 
 ### Navigation
 - `Tabs` - Tab navigation. Props: `tabs: {label, value}[]`, `onTabClick: (value) => void`
@@ -109,10 +123,11 @@ import { Grid, GridItem } from "@madecki/ui";
 </Grid>
 
 // Form
-import { Input, Select, Button, Stack } from "@madecki/ui";
+import { Input, Textarea, Select, Button, Stack } from "@madecki/ui";
 
 <Stack gap="4">
   <Input name="email" label="Email" type="email" onChange={setEmail} />
+  <Textarea name="bio" label="Bio" rows={5} onChange={setBio} />
   <Select
     name="role"
     label="Role"
@@ -138,7 +153,7 @@ If **`value !== undefined`**, the input is controlled (including **`value=""`**)
 
 ### Input — testing
 
-- Prefer **`testId`** so Playwright can target `getByTestId("…")` on the real `<input>` without a generic `locator("input")`.
+- Prefer querying by **accessible name** from the label, e.g. **`getByRole("textbox", { name: "Email" })`** or **`getByLabelText("Email")`**. Optional **`testId`** still sets `data-testid` on the native `<input>` for Playwright when you want a stable hook.
 - With **controlled** `value` + `onChange`, `fill()` / typing stay in sync as long as the parent updates state from `onChange` (no `onInputCapture` workaround needed).
 
 ### Select — controlled vs uncontrolled
@@ -155,24 +170,25 @@ If **`value !== undefined`**, the input is controlled (including **`value=""`**)
 
 ### Select — testing
 
+**Prefer label / role:** `getByRole("combobox", { name: "Role" })` matches the combobox’s accessible name from the visible (or sr-only) label.
+
 **Stable hooks:** Set `testId` for predictable selectors (default is `select-{name}`).
 
-- Combobox input: `data-testid={testId}` (also `role="combobox"`, `aria-label` = `label`).
-- Open list: `data-testid="{testId}-listbox"` (`role="listbox"`). Open the field first (click or focus) so the list is in the DOM.
+- Combobox input: `data-testid={testId}`, `role="combobox"`.
+- Open list: `data-testid="{testId}-listbox"` (`role="listbox"`, named via `aria-labelledby` → field label). Open the field first (click or focus) so the list is in the DOM.
 - Each option: `data-testid="{testId}-option-{slug}"` and `data-option-value` with the real value. Slug = option `value` with non-alphanumeric characters replaced by `_`.
 
 **Playwright examples:**
 
 ```ts
-const base = "signup-role";
-await page.getByTestId(base).click();
-await expect(page.getByTestId(`${base}-listbox`)).toBeVisible();
-await page.getByTestId(`${base}-option-admin`).click();
+await page.getByRole("combobox", { name: "Role" }).click();
+await expect(page.getByTestId("signup-role-listbox")).toBeVisible();
+await page.getByTestId("signup-role-option-admin").click();
 // Or by accessible name (option text is the label):
 await page.getByRole("option", { name: "Admin" }).click();
 ```
 
-**Unit / component tests (e.g. Vitest + Testing Library):** Render with a fixed `testId`, `userEvent.click` the combobox, assert the listbox and options with `getByTestId`, or use `getByRole("combobox")` / `getByRole("listbox")` / `getByRole("option", { name: "…" })`.
+**Unit / component tests (e.g. Vitest + Testing Library):** Open the combobox with `getByRole("combobox", { name: "…" })`, then assert the listbox and options with `getByTestId` or `getByRole("option", { name: "…" })`.
 
 ## Rules
 

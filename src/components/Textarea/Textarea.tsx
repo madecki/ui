@@ -1,19 +1,13 @@
-import {
-  type ChangeEventHandler,
-  type HTMLInputTypeAttribute,
-  type ReactNode,
-  useId,
-  useState,
-} from "react";
+import { type ChangeEventHandler, useId, useState } from "react";
 import {
   FormFieldLabel,
   type LabelVisibility,
 } from "../FormFieldLabel";
 
-export interface InputProps {
+export interface TextareaProps {
   name: string;
   onChange?: (value: string) => void;
-  /** When set, the input is controlled; the parent must update this from `onChange`. */
+  /** When set, the textarea is controlled; the parent must update this from `onChange`. */
   value?: string;
   /** Initial value when uncontrolled (`value` omitted). Does not update after mount if `defaultValue` prop changes. */
   defaultValue?: string;
@@ -22,22 +16,18 @@ export interface InputProps {
   /** Default `visible`. Use `sr-only` to hide the label visually while keeping it for assistive tech. */
   labelVisibility?: LabelVisibility;
   variant?: "primary" | "secondary" | "tertiary";
-  /** Any standard HTML `input` type (e.g. `date`, `time`, `email`). */
-  type?: HTMLInputTypeAttribute;
+  rows?: number;
   maxLength?: number;
   required?: boolean;
-  pattern?: string;
-  title?: string;
   ariaLabel?: string;
   spellCheck?: boolean;
   disabled?: boolean;
   className?: string;
-  icon?: ReactNode;
-  /** Sets `data-testid` on the native `<input>` for e2e (e.g. Playwright). */
+  /** Sets `data-testid` on the native `<textarea>` for e2e (e.g. Playwright). */
   testId?: string;
 }
 
-export const Input = ({
+export const Textarea = ({
   name,
   onChange,
   value: valueProp,
@@ -46,18 +36,15 @@ export const Input = ({
   label,
   labelVisibility = "visible",
   variant = "primary",
-  type = "text",
+  rows = 4,
   maxLength,
   required = false,
-  pattern,
-  title,
   ariaLabel,
   spellCheck,
   disabled = false,
   className = "",
-  icon,
   testId,
-}: InputProps) => {
+}: TextareaProps) => {
   const labelId = useId();
   const isControlled = valueProp !== undefined;
   const [internalValue, setInternalValue] = useState(() => defaultValue ?? "");
@@ -65,14 +52,16 @@ export const Input = ({
 
   const value = isControlled ? valueProp : internalValue;
 
-  const inputClassNames = ["rounded-sm font-sans z-10 w-full"];
+  const fieldClassNames = [
+    "min-h-[6rem] resize-y rounded-sm font-sans z-10 w-full",
+  ];
 
   const spacings = "py-4 px-5";
   const outline = "outline-hidden";
 
-  inputClassNames.push(spacings, outline);
+  fieldClassNames.push(spacings, outline);
 
-  const inputWrapperClassNames = ["flex rounded-smb p-px w-full"];
+  const inputWrapperClassNames = ["rounded-smb p-px w-full"];
 
   if (isFocused) {
     inputWrapperClassNames.push("bg-gradient");
@@ -82,21 +71,21 @@ export const Input = ({
 
   switch (variant) {
     case "primary":
-      inputClassNames.push("text-primary bg-neutral");
+      fieldClassNames.push("text-primary bg-neutral");
       break;
     case "secondary":
-      inputClassNames.push("text-neutral bg-neutral dark:bg-gray");
+      fieldClassNames.push("text-neutral bg-neutral dark:bg-gray");
       break;
     case "tertiary":
-      inputClassNames.push("text-neutral bg-neutral dark:bg-primary");
+      fieldClassNames.push("text-neutral bg-neutral dark:bg-primary");
       break;
   }
 
   if (disabled) {
-    inputClassNames.push("cursor-not-allowed opacity-50");
+    fieldClassNames.push("cursor-not-allowed opacity-50");
   }
 
-  const onInputChange: ChangeEventHandler<HTMLInputElement> = (event) => {
+  const onFieldChange: ChangeEventHandler<HTMLTextAreaElement> = (event) => {
     const next = event.target.value;
     if (!isControlled) {
       setInternalValue(next);
@@ -114,27 +103,19 @@ export const Input = ({
         />
 
         <div className={inputWrapperClassNames.join(" ")}>
-          {icon && (
-            <div className="flex items-center justify-center pl-4">
-              {icon}
-            </div>
-          )}
-
-          <input
+          <textarea
             id={name}
             name={name}
+            rows={rows}
             placeholder={placeholder}
             value={value}
-            className={inputClassNames.join(" ")}
+            className={fieldClassNames.join(" ")}
             autoComplete="off"
-            onChange={onInputChange}
+            onChange={onFieldChange}
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
-            type={type}
             maxLength={maxLength}
             required={required}
-            pattern={pattern}
-            title={title}
             aria-label={ariaLabel}
             spellCheck={spellCheck}
             disabled={disabled}
@@ -146,4 +127,4 @@ export const Input = ({
   );
 };
 
-export default Input;
+export default Textarea;

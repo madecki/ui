@@ -16,6 +16,11 @@ export { Tag, type TagProps } from "./Tag";
 // Input
 export { Input, type InputProps } from "./Input";
 
+// Textarea
+export { Textarea, type TextareaProps } from "./Textarea";
+
+export type { LabelVisibility } from "./FormFieldLabel";
+
 // Select
 export {
   Select,

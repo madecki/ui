@@ -21,6 +21,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
+    label: "Choose an option",
     items: [
       { id: "option1", variant: "primary", label: "Option 1" },
       { id: "option2", variant: "primary", label: "Option 2" },
@@ -32,6 +33,7 @@ export const Default: Story = {
 
 export const ColorVariants: Story = {
   args: {
+    label: "Color",
     items: [
       { id: "success", variant: "success", label: "Success" },
       { id: "warning", variant: "warning", label: "Warning" },
@@ -44,6 +46,7 @@ export const ColorVariants: Story = {
 
 export const Small: Story = {
   args: {
+    label: "Size",
     items: [
       { id: "opt1", variant: "primary", label: "One" },
       { id: "opt2", variant: "primary", label: "Two" },

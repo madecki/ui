@@ -574,29 +574,43 @@ src/components/ComponentName/
 
 ## Releasing
 
-Releases are fully automated using [semantic-release](https://semantic-release.gitbook.io/). When commits are pushed to `main`, the CI automatically:
+Releases are fully automated using [semantic-release](https://semantic-release.gitbook.io/). When commits are pushed to `main`, the **Release** workflow runs `typecheck`, `lint`, `build`, and **`npm test`**, then **`npx semantic-release`**, which in order:
 
-1. Analyzes commit messages to determine the version bump
-2. Updates `package.json` and `CHANGELOG.md`
-3. Creates a Git tag and GitHub Release
-4. Publishes to NPM with provenance
+1. Analyzes **conventional** commit messages since the last release to pick the **semver** bump
+2. Generates release notes **only** from those commits
+3. **Prepends** a new `## [version]` section to **`CHANGELOG.md`** and sets **`package.json`** `"version"`
+4. Publishes to npm (the `prepublishOnly` script builds again)
+5. Pushes the version commit, creates a Git tag, and opens a **GitHub Release**
+
+There is **no** separate manual changelog step: if it is not described in a merged commit on `main`, it will not appear in **`CHANGELOG.md`**.
 
 ### Commit Message Format
 
-This project uses [Conventional Commits](https://www.conventionalcommits.org/) enforced by [commitlint](https://commitlint.js.org/).
+This project uses [Conventional Commits](https://www.conventionalcommits.org/) enforced by [commitlint](https://commitlint.js.org/):
+
+- **Locally:** Husky runs **`commitlint`** on the **`commit-msg`** hook, so **`git commit` fails** if the message does not follow the rules (bypass only with **`git commit --no-verify`**).
+- **On `main`:** CI runs commitlint on **every push** for the commits in that push, so bad messages are caught even if someone skipped the hook.
 
 **Format:** `type(scope?): description`
 
-| Type | Description | Release |
-|------|-------------|---------|
-| `feat` | New feature | Minor |
-| `fix` | Bug fix | Patch |
-| `docs` | Documentation only | None |
+| Type | Description | Release / changelog |
+|------|-------------|---------------------|
+| `feat` | New feature | Minor; appears under **Features** |
+| `fix` | Bug fix | Patch; appears under **Bug Fixes** |
+| `perf` | Performance improvement | Patch; appears under **Performance Improvements** |
+| `docs` | Documentation only | None (not in changelog by default) |
 | `style` | Code style (formatting) | None |
 | `refactor` | Code change (no fix/feat) | None |
-| `perf` | Performance improvement | Patch |
 | `test` | Adding/updating tests | None |
 | `chore` | Maintenance tasks | None |
+
+**Breaking changes** (major bump): use **`feat!:`** / **`fix!:`** and/or a **`BREAKING CHANGE:`** paragraph in the commit **body** (after a blank line). Example body:
+
+```text
+feat!: require label on RadioButtons
+
+BREAKING CHANGE: RadioButtons now requires a `label` prop.
+```
 
 ### Examples
 

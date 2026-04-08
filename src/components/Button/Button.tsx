@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { type AriaRole, type ReactNode } from "react";
 import type { ColorVariants, Size } from "../../types";
 import { getTagSurfaceClassNames } from "../Tag/tagSurfaceClassNames";
 
@@ -13,6 +13,9 @@ export interface ButtonProps {
   disabled?: boolean;
   className?: string;
   type?: "button" | "submit" | "reset";
+  /** e.g. `radio` when used inside a `radiogroup` */
+  role?: AriaRole;
+  ariaChecked?: boolean | "mixed";
 }
 
 export const Button = ({
@@ -26,6 +29,8 @@ export const Button = ({
   disabled,
   className = "",
   type = "button",
+  role,
+  ariaChecked,
 }: ButtonProps) => {
   if (typeof isActive === "boolean" && id === undefined) {
     throw Error("If button has isActive props, it must have id props too");
@@ -43,6 +48,8 @@ export const Button = ({
   return (
     <button
       type={type}
+      role={role}
+      aria-checked={ariaChecked}
       className={surfaceClassName}
       onClick={() => {
         if (isActive === true) {

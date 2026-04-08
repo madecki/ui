@@ -156,6 +156,15 @@ export const WithTestId: Story = {
   },
 };
 
+export const LabelSrOnly: Story = {
+  args: {
+    name: "sr-input",
+    label: "Screen reader only",
+    labelVisibility: "sr-only",
+    placeholder: "Label hidden visually",
+  },
+};
+
 export const DateType: Story = {
   args: {
     name: "date-input",

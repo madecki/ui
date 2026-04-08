@@ -9,6 +9,10 @@ import {
   useRef,
   useState,
 } from "react";
+import {
+  FormFieldLabel,
+  type LabelVisibility,
+} from "../FormFieldLabel";
 
 export type SelectOption = {
   value: string;
@@ -18,6 +22,8 @@ export type SelectOption = {
 type BaseSelectProps = {
   name: string;
   label: string;
+  /** Default `visible`. Use `sr-only` to hide the label visually while keeping it for assistive tech. */
+  labelVisibility?: LabelVisibility;
   options: SelectOption[];
   placeholder?: string;
   variant?: "primary" | "secondary" | "tertiary";
@@ -142,6 +148,7 @@ export function Select(props: SelectProps) {
   const {
     name,
     label,
+    labelVisibility = "visible",
     options,
     placeholder = "Select…",
     variant = "primary",
@@ -149,6 +156,8 @@ export function Select(props: SelectProps) {
     className = "",
     testId: testIdProp,
   } = props;
+
+  const labelId = useId();
 
   const isMulti = props.multi === true;
   const singleValueProp = !isMulti
@@ -403,8 +412,12 @@ export function Select(props: SelectProps) {
 
   return (
     <div ref={containerRef} className={`relative ${className}`.trim()}>
-      <label htmlFor={name}>
-        <span className="sr-only">{label}</span>
+      <label htmlFor={name} className="block">
+        <FormFieldLabel
+          id={labelId}
+          label={label}
+          labelVisibility={labelVisibility}
+        />
 
         <div className={inputWrapperClassNames.join(" ")}>
           <div className={innerFieldClassNames.join(" ")}>
@@ -418,7 +431,6 @@ export function Select(props: SelectProps) {
               disabled={disabled}
               placeholder={placeholder}
               value={inputValue}
-              aria-label={label}
               aria-expanded={open}
               aria-haspopup="listbox"
               aria-controls={listboxId}
@@ -445,7 +457,7 @@ export function Select(props: SelectProps) {
           id={listboxId}
           role="listbox"
           aria-multiselectable={isMulti}
-          aria-label={label}
+          aria-labelledby={labelId}
           data-testid={`${baseTestId}-listbox`}
           tabIndex={-1}
           className={listboxClass}

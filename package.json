@@ -29,11 +29,13 @@
       }
     },
     "./llm-context": "./llm-context.md",
-    "./cursor-rule-template": "./cursor-rule-template.md"
+    "./cursor-rule-template": "./cursor-rule-template.md",
+    "./CHANGELOG.md": "./CHANGELOG.md"
   },
   "files": [
     "dist",
     "README.md",
+    "CHANGELOG.md",
     "llm-context.md",
     "cursor-rule-template.md"
   ],

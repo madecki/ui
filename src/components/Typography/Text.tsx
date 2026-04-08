@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 
 export interface TextProps {
   children: ReactNode;
+  id?: string;
   size?: "xs" | "sm" | "md" | "lg";
   weight?: "normal" | "medium" | "semibold" | "bold";
   color?: "default" | "muted" | "primary" | "success" | "warning" | "danger";
@@ -34,6 +35,7 @@ const colorStyles = {
 
 export const Text = ({
   children,
+  id,
   size = "md",
   weight = "normal",
   color = "default",
@@ -42,6 +44,7 @@ export const Text = ({
 }: TextProps) => {
   return (
     <Tag
+      id={id}
       className={`${sizeStyles[size]} ${weightStyles[weight]} ${colorStyles[color]} ${className}`}
     >
       {children}

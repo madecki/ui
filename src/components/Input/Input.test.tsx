@@ -18,11 +18,10 @@ describe("Input", () => {
         label="Field"
         defaultValue="hi"
         onChange={onChange}
-        testId="field-x"
       />,
     );
 
-    const el = screen.getByTestId("field-x");
+    const el = screen.getByRole("textbox", { name: "Field" });
     expect(el).toHaveValue("hi");
     await user.clear(el);
     await user.type(el, "yo");
@@ -33,14 +32,14 @@ describe("Input", () => {
   it("is controlled when value is passed and follows parent state", () => {
     const onChange = vi.fn();
     const { rerender } = render(
-      <Input name="x" label="Field" value="a" onChange={onChange} testId="field-x" />,
+      <Input name="x" label="Field" value="a" onChange={onChange} />,
     );
 
-    const el = screen.getByTestId("field-x");
+    const el = screen.getByRole("textbox", { name: "Field" });
     expect(el).toHaveValue("a");
 
     rerender(
-      <Input name="x" label="Field" value="b" onChange={onChange} testId="field-x" />,
+      <Input name="x" label="Field" value="b" onChange={onChange} />,
     );
     expect(el).toHaveValue("b");
   });
@@ -60,13 +59,12 @@ describe("Input", () => {
             onChange(next);
             setV(next);
           }}
-          testId="field-x"
         />
       );
     }
 
     render(<Wrapper />);
-    const el = screen.getByTestId("field-x");
+    const el = screen.getByRole("textbox", { name: "Field" });
     await user.clear(el);
     await user.type(el, "hi");
     expect(onChange).toHaveBeenCalled();
@@ -75,17 +73,17 @@ describe("Input", () => {
 
   it("treats empty string as controlled", () => {
     render(
-      <Input name="x" label="Field" value="" onChange={vi.fn()} testId="field-x" />,
+      <Input name="x" label="Field" value="" onChange={vi.fn()} />,
     );
-    expect(screen.getByTestId("field-x")).toHaveValue("");
+    expect(screen.getByRole("textbox", { name: "Field" })).toHaveValue("");
   });
 
   it("forwards maxLength to the native input", async () => {
     const user = userEvent.setup();
     render(
-      <Input name="x" label="Field" maxLength={3} testId="field-x" />,
+      <Input name="x" label="Field" maxLength={3} />,
     );
-    const el = screen.getByTestId("field-x");
+    const el = screen.getByRole("textbox", { name: "Field" });
     await user.type(el, "abcdef");
     expect(el).toHaveValue("abc");
   });
@@ -98,9 +96,17 @@ describe("Input", () => {
         type="date"
         value="2026-03-30"
         onChange={vi.fn()}
-        testId="field-d"
       />,
     );
-    expect(screen.getByTestId("field-d")).toHaveAttribute("type", "date");
+    expect(screen.getByLabelText("Date")).toHaveAttribute("type", "date");
+  });
+
+  it("exposes testId on the native input when provided", () => {
+    render(
+      <Input name="x" label="Field" testId="field-x" />,
+    );
+    expect(screen.getByTestId("field-x")).toBe(
+      screen.getByRole("textbox", { name: "Field" }),
+    );
   });
 });

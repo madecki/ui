@@ -1,8 +1,6 @@
 ---
-description: Rules for developing @madecki/ui component library
-globs: **/*.{tsx,jsx,ts,js,md}
+alwaysApply: true
 ---
-
 # @madecki/ui Library Development Rules
 
 This is the @madecki/ui component library. Follow these rules when making changes.
@@ -59,6 +57,42 @@ In `src/index.ts`:
 export { ComponentName, type ComponentNameProps } from "./components";
 ```
 
+## CRITICAL: Conventional commits (changelog source of truth)
+
+**`CHANGELOG.md` is generated only by [semantic-release](https://github.com/semantic-release/semantic-release) on publish** from git history. **Do not hand-edit** release sections in **`CHANGELOG.md`**.
+
+For any user-visible or breaking work, use valid [Conventional Commits](https://www.conventionalcommits.org/) so the next release notes are correct:
+
+- **`feat:`** — new behavior or API consumers can use (minor bump).
+- **`fix:`** — bug fix (patch bump).
+- **`perf:`** — performance (patch bump).
+- **Breaking changes** — **`feat!:`** / **`fix!:`** and/or a footer line **`BREAKING CHANGE: description`** (major bump when analyzer detects it).
+- Types like **`chore`**, **`docs`**, **`test`**, **`refactor`** do not usually appear in the changelog unless configured; use them for internal-only work.
+
+[commitlint](https://commitlint.js.org/) runs on **`commit-msg`** (Husky) on **every `git commit`**, and again in **CI on each push to `main`** for the commits in that push. Invalid messages must be fixed before the commit is created (or CI will fail if **`--no-verify`** was used locally).
+
+## CRITICAL: Commit when a task is finished
+
+When you finish a coherent task (feature, fix, or doc/tooling change), **create a git commit** before moving on. Do not leave large uncommitted piles of work.
+
+### Message quality
+
+- Use a **Conventional Commits** subject that states **what** changed and **why** it matters to consumers or maintainers (not vague text like “updates” or “fixes”).
+- In the **body**, list concrete changes (components, props, files, behavior) so the changelog and `git log` stay readable.
+- Prefer **one commit per completed task**. If a task mixes unrelated concerns, split into separate commits.
+
+### Breaking changes (extra care)
+
+If consumers must **change their code** or **expect different runtime behavior**, treat it as **breaking**:
+
+- Use **`feat!:`** or **`fix!:`** in the subject **and/or** a **`BREAKING CHANGE:`** paragraph in the body (after a blank line).
+- In that paragraph, say **exactly** what breaks (e.g. removed prop, renamed export, new required prop) and what to do instead.
+- Update **`llm-context.md`** and **`README.md`** in the **same** commit when the public API or usage patterns change.
+
+### What usually is *not* breaking
+
+Internal refactors, tests-only changes, or Storybook-only tweaks: use **`refactor:`**, **`test:`**, or **`chore:`** and **no** `!` / **`BREAKING CHANGE:`** unless the published API or documented contract actually changed.
+
 ## CRITICAL: Update LLM Context Files
 
 When you add, remove, or modify components/props, you MUST update these files:
@@ -84,9 +118,10 @@ When modifying components, update these files in order:
 2. [ ] Component index (`src/components/*/index.ts`)
 3. [ ] Components barrel (`src/components/index.ts`)
 4. [ ] Main exports (`src/index.ts`)
-5. [ ] LLM context (`llm-context.md`)
-6. [ ] Cursor template (`cursor-rule-template.md`)
-7. [ ] README documentation (`README.md`)
+5. [ ] **Conventional commit(s)** covering user-visible / breaking changes (changelog is generated on release — do not edit `CHANGELOG.md` by hand)
+6. [ ] LLM context (`llm-context.md`)
+7. [ ] Cursor template (`cursor-rule-template.md`)
+8. [ ] README documentation (`README.md`)
 
 ## Design Tokens
 
