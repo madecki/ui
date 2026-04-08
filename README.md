@@ -589,6 +589,7 @@ There is **no** separate manual changelog step: if it is not described in a merg
 This project uses [Conventional Commits](https://www.conventionalcommits.org/) enforced by [commitlint](https://commitlint.js.org/):
 
 - **Locally:** Husky runs **`commitlint`** on the **`commit-msg`** hook, so **`git commit` fails** if the message does not follow the rules (bypass only with **`git commit --no-verify`**).
+- **Locally:** Husky runs **`npm run precheck`** on **`pre-push`** (typecheck, lint, build, tests, Storybook build — same as CI/Release). Bypass with **`git push --no-verify`** if you must.
 - **On `main`:** CI runs commitlint on **every push** for the commits in that push, so bad messages are caught even if someone skipped the hook.
 
 **Format:** `type(scope?): description`

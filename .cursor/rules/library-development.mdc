@@ -155,14 +155,6 @@ All components must support dark mode using `dark:` prefix:
 
 ## Testing Changes
 
-Before **pushing to `main`**, run the same checks CI and Release use (including Storybook, which type-checks `*.stories.tsx` under `src/`):
+**Pre-push (Husky):** every **`git push`** runs **`npm run precheck`** — **`typecheck`**, **`lint`**, **`build`**, **`test`**, **`build-storybook`** (aligned with CI / Release). Use **`git push --no-verify`** only when you intentionally skip (not recommended).
 
-```bash
-npm run typecheck        # Required — catches Storybook/story typing errors
-npm run lint             # ESLint
-npm run build            # Library bundle
-npm test                 # Unit tests
-npm run build-storybook  # Storybook static build (Release runs this too)
-```
-
-For local UI review only: `npm run storybook`
+Manual run: **`npm run precheck`**. Local Storybook dev: **`npm run storybook`**.
