@@ -1,3 +1,10 @@
+## [2.1.0](https://github.com/madecki/ui/compare/v2.0.0...v2.1.0) (2026-04-08)
+
+### Features
+
+* add DetailsPanel native details/summary disclosure ([d1d24d9](https://github.com/madecki/ui/commit/d1d24d989537fe1845aeb5059b3f59d745357c23))
+* add Toast with placement, auto-close, and variants ([5874709](https://github.com/madecki/ui/commit/587470962cf265eafe8cc9659b78b073f6ef1756))
+
 ## [2.0.0](https://github.com/madecki/ui/compare/v1.5.0...v2.0.0) (2026-04-08)
 
 ### ⚠ BREAKING CHANGES
